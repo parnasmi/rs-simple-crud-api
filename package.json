@@ -6,7 +6,8 @@
     "start:dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "start:prod": "tsc && node dist/index.js",
     "lint": "eslint --fix .",
-    "test": "mocha -r ts-node/register test/**/*.test.ts"
+    "test": "mocha -r ts-node/register test/**/*.test.ts",
+    "start:multi": "ts-node src/multi.ts"
   },
   "keywords": [],
   "author": "",
