@@ -46,7 +46,7 @@ export const updateUserById = async (
   }
 
   try {
-    const body = await parseRequestBody(req);
+    const body = await parseRequestBody<User>(req);
     const { username, age, hobbies } = body;
 
     if (
@@ -82,9 +82,7 @@ export const updateUserById = async (
 
 export const createUser = async (req: IncomingMessage, res: ServerResponse) => {
   try {
-    const body = await parseRequestBody(req);
-
-    //TODO: fix typing later
+    const body = await parseRequestBody<User>(req);
     const { username, age, hobbies } = body;
 
     if (
