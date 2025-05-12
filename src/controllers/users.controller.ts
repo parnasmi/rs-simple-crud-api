@@ -4,6 +4,29 @@ import { validate as isValidUUID, v4 as uuidv4 } from 'uuid';
 import { parseRequestBody } from '../utils/bodyParser';
 import { User } from '../models/user.model';
 
+export const deleteUserById = async (
+  req: IncomingMessage,
+  res: ServerResponse,
+  userId: string,
+) => {
+  if (!isValidUUID(userId)) {
+    res.writeHead(400, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ message: 'Invalid UUID' }));
+    return;
+  }
+
+  const userIndex = users.findIndex((u) => u.id === userId);
+  if (userIndex === -1) {
+    res.writeHead(404, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ message: `User with id ${userId} not found` }));
+    return;
+  }
+
+  users.splice(userIndex, 1);
+  res.writeHead(204);
+  res.end();
+};
+
 export const updateUserById = async (
   req: IncomingMessage,
   res: ServerResponse,

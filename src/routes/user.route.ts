@@ -1,6 +1,7 @@
 import { IncomingMessage, ServerResponse } from 'http';
 import {
   createUser,
+  deleteUserById,
   getAllUsers,
   getUserById,
   updateUserById,
@@ -32,6 +33,12 @@ export const handleUserRoutes = (req: IncomingMessage, res: ServerResponse) => {
   if (userIdMatch && method === 'GET') {
     const userId = userIdMatch[1];
     return getUserById(req, res, userId);
+  }
+
+  // DELETE /api/users/:id
+  if (url.startsWith('/api/users') && method === 'DELETE') {
+    const userId = url.split('/')[3];
+    return deleteUserById(req, res, userId);
   }
 
   //If no matching
