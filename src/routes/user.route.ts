@@ -22,9 +22,9 @@ export const handleUserRoutes = (req: IncomingMessage, res: ServerResponse) => {
   }
 
   // PUT /api/users/:id
-  if (url.startsWith('/api/users/') && method === 'PUT') {
-    const userId = url.split('/')[3];
-    console.log('userId', { userId, url });
+  const putMatch = url.match(/^\/api\/users\/([0-9a-fA-F-]{36})$/);
+  if (putMatch && method === 'PUT') {
+    const userId = putMatch[1];
     return updateUserById(req, res, userId);
   }
 
@@ -36,8 +36,9 @@ export const handleUserRoutes = (req: IncomingMessage, res: ServerResponse) => {
   }
 
   // DELETE /api/users/:id
-  if (url.startsWith('/api/users') && method === 'DELETE') {
-    const userId = url.split('/')[3];
+  const deleteMatch = url.match(/^\/api\/users\/([0-9a-fA-F-]{36})$/);
+  if (deleteMatch && method === 'DELETE') {
+    const userId = deleteMatch?.[1];
     return deleteUserById(req, res, userId);
   }
 
