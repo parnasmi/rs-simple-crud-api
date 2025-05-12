@@ -1,5 +1,5 @@
 import { IncomingMessage, ServerResponse } from "http";
-import { getAllUsers, getUserById } from "../controllers/users.controller";
+import { createUser, getAllUsers, getUserById } from "../controllers/users.controller";
 
 export const handleUserRoutes = (req: IncomingMessage, res: ServerResponse) => {
   const url = req.url || "";
@@ -8,6 +8,10 @@ export const handleUserRoutes = (req: IncomingMessage, res: ServerResponse) => {
   // GET /api/users
   if (url === "/api/users" && method === "GET") {
     return getAllUsers(req, res);
+  }
+
+  if(url === '/api/users' && method === 'POST') {
+    return createUser(req, res);
   }
 
   // GET /api/users/:id
