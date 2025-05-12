@@ -1,0 +1,10 @@
+node_modules
+.idea
+dist
+.env
+.env.example
+
+# misc
+.DS_Store
+*.pem
+package-lock.json
